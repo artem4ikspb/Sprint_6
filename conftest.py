@@ -1,6 +1,8 @@
 import data
 import pytest
 from pages.main_page import MainPage
+from pages.order_page import OrderPage
+
 from selenium import webdriver
 
 @pytest.fixture(scope='function')
@@ -14,6 +16,13 @@ def driver():
 @pytest.fixture(scope='function')
 def main_page(driver):
     page = MainPage(driver)
-    page.go_to_url(data.URL_MAIN_PAGE)
+    page.go_to_url(data.BASE_URL)
+    return page
+
+@pytest.fixture(scope='function')
+def order_page(driver):
+    print ('### Open browser window')
+    page = OrderPage(driver)
+    page.go_to_url(data.ORDER_URL)
     return page
     
