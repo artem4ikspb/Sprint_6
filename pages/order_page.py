@@ -1,19 +1,13 @@
 import allure
-import pytest
-from utils import helpers
 from locators.order_page_locators import OrderPageLocators 
-from pages.base_page import BasePage
+from pages.general_elements import GeneralElements
 
 
-import time
-
-
-class OrderPage(BasePage):
+class OrderPage(GeneralElements):
 
     @allure.step('  Заполняем поле Имя на форме заказа')
     def set_name_field(self, name):
         self.add_text_to_element(OrderPageLocators.NAME_FIELD, name)
-     # self.add_simple_text(OrderPageLocators.NAME_FIELD, name)
 
     @allure.step('  Заполняем поле "Фамилия"')
     def set_surname_field(self, surname):
@@ -26,6 +20,7 @@ class OrderPage(BasePage):
     @allure.step('  Выбираем станцию метро')
     def choose_station_field(self, station_name):
         self.click_to_element(OrderPageLocators.METRO_DROPDOWN)
+        self.scroll_to_element(OrderPageLocators.select_metro_station_from_dropdown(station_name))
         self.click_to_element(OrderPageLocators.select_metro_station_from_dropdown(station_name))
 
     @allure.step('  Заполняем поле "Номер телефона"')
@@ -80,3 +75,14 @@ class OrderPage(BasePage):
     @allure.step('Нажимаем кнопку "Заказать"')
     def click_order_button(self):
         self.click_to_element(OrderPageLocators.ORDER_BUTTON)
+
+    @allure.step('Подтверждаем заказ')
+    def confirm_order(self):
+        self.click_to_element(OrderPageLocators.CONFIRM_ORDER_BUTTON)
+
+    @allure.step('Проверяем модальную форму заказа')
+    def check_modal_order(self, text):
+        result_text = self.get_text_from_element(OrderPageLocators.COMPLITE_ORDER_MODAL_SUCCESS)
+        if text in result_text:
+            return True
+        return False

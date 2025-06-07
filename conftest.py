@@ -21,7 +21,6 @@ def main_page(driver):
 
 @pytest.fixture(scope='function')
 def order_page(driver):
-    print ('### Open browser window')
     page = OrderPage(driver)
     page.go_to_url(data.ORDER_URL)
     return page

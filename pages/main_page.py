@@ -1,13 +1,9 @@
 import allure
 from locators.main_page_locators import MainPageLocators
-from pages.base_page import BasePage
+from pages.general_elements import GeneralElements
 
 
-class MainPage(BasePage):
-    
-    @allure.step('Закрываем окно с куками')
-    def close_cookie_window(self):
-        self.click_to_element(MainPageLocators.COOCKIE_CLOSE_BUTTON)
+class MainPage(GeneralElements):
 
     @allure.step('Кликаем на вопрос {num}')
     def click_to_question(self, num):
@@ -28,3 +24,8 @@ class MainPage(BasePage):
     @allure.step('Открываем страницу заказа через кнопку сверху')
     def click_top_order_button(self):
         self.click_to_element(MainPageLocators.ORDER_TOP_BUTTON)
+
+    @allure.step('Открываем страницу заказа через кнопку снизу')
+    def click_bottom_order_button(self):
+        self.click_to_element(MainPageLocators.ORDER_BOTTOM_BUTTON)
+

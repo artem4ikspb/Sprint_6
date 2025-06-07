@@ -1,4 +1,3 @@
-import allure
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
@@ -11,7 +10,6 @@ class BasePage:
         self.timeout = 5
         self.wait = WebDriverWait(self.driver, self.timeout)
 
-    @allure.step('Открываем страницу {url}')
     def go_to_url(self, url):
         return self.driver.get(url)
 
@@ -33,7 +31,6 @@ class BasePage:
         self.find_element_with_wait(locator).send_keys(date)
         self.find_element_with_wait(locator).send_keys(Keys.ENTER)
 
-
     def get_text_from_element(self, locator):
         return self.find_element_with_wait(locator).text
     
@@ -45,3 +42,22 @@ class BasePage:
     def scroll_to_element(self, locator):
         element = self.driver.find_element(*locator) 
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
+
+    def get_current_page(self):
+        return self.driver.current_url
+    
+    def is_visible(self, locator):
+        return self.find_element_with_wait(locator).is_displayed()
+    
+    def all_tabs_list(self):
+        return self.driver.window_handles
+
+    def switch_to_tab(self, tab):
+        self.driver.switch_to.window(tab)
+
+    def switch_to_new_tab (self):
+        tabs = self.all_tabs_list()
+        self.switch_to_tab(tabs[-1])
+
+
+    
