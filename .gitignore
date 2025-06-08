@@ -33,7 +33,7 @@ MANIFEST
 *.spec
 
 # allure
-.allure-results
+allure-results/
 
 # Installer logs
 pip-log.txt

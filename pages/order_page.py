@@ -1,9 +1,9 @@
 import allure
 from locators.order_page_locators import OrderPageLocators 
-from pages.general_elements import GeneralElements
+from pages.base_page import BasePage
 
 
-class OrderPage(GeneralElements):
+class OrderPage(BasePage):
 
     @allure.step('  Заполняем поле Имя на форме заказа')
     def set_name_field(self, name):
